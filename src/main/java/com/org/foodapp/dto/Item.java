@@ -59,4 +59,12 @@ public class Item {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	public FoodOrder getFoodOrder() {
+		return foodOrder;
+	}
+	public void setFoodOrder(FoodOrder foodOrder) {
+		this.foodOrder = foodOrder;
+	}
+	
+	
 }

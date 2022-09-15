@@ -1,36 +1,72 @@
 package com.org.foodapp.services;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import com.org.foodapp.dao.FoodOrderDao;
+import com.org.foodapp.dao.FoodProductDao;
 import com.org.foodapp.dao.ItemDao;
+import com.org.foodapp.dto.FoodOrder;
+import com.org.foodapp.dto.FoodProduct;
 import com.org.foodapp.dto.Item;
+import com.org.foodapp.responseStructure.ResponseStructure;
 
 @Service
 public class ItemService {
 
 	@Autowired
 	ItemDao itemDao;
-	public Item saveItem(@RequestBody Item item) {
-		return itemDao.saveItem(item);
-	}
 	
-	public Item updateItem(@RequestBody Item item) {
-		return itemDao.updateItem(item);
-	}
+	@Autowired
+	FoodOrderDao foodOrderDao ;
 	
-	public List<Item> getAllItems(){
-		return itemDao.getAllItems();
-	}
+	@Autowired
+	FoodProductDao foodProductDao ;
 	
-	public Item getItemById( int id) {
-		return itemDao.getItemById(id);
-	}
+	public ResponseEntity<ResponseStructure<Item>> saveItem(Item item, int foodOrderId){
+		Optional<FoodProduct> foodProductOptional = foodProductDao.getFoodProductById(item.getProductId());
+		
+		ResponseStructure<Item> structure = new ResponseStructure<>();
+		item.setProductId(foodProductOptional.get().getId());
+		item.setName(foodProductOptional.get().getName());
+		item.setType(foodProductOptional.get().getType());
+		item.setPrice(foodProductOptional.get().getPrice());
+		
+		System.out.println(foodProductOptional.get().getId());
+		System.out.println(foodOrderId);
+		Optional<FoodOrder> foodOptional = foodOrderDao.getFoodOrderById(foodOrderId);
+		if(foodOptional.isEmpty()) {
+			System.out.println("No id found");
+		}else {
+			item.setFoodOrder(foodOptional.get());
+			structure.setErr(false);
+			structure.setMessage("Item is added");
+			structure.setData(itemDao.saveItem(item));
+		}
+		return new ResponseEntity<ResponseStructure<Item>>(structure, HttpStatus.OK);
+		}
 	
-	public String deleteItem( int id) {
-		return itemDao.deleteItem(id);
-	}
+//	public Item saveItem(@RequestBody Item item) {
+//		return itemDao.saveItem(item);
+//	}
+//	
+//	public Item updateItem(@RequestBody Item item) {
+//		return itemDao.updateItem(item);
+//	}
+//	
+//	public List<Item> getAllItems(){
+//		return itemDao.getAllItems();
+//	}
+//	
+//	public Item getItemById( int id) {
+//		return itemDao.getItemById(id);
+//	}
+//	
+//	public String deleteItem( int id) {
+//		return itemDao.deleteItem(id);
+//	}
 }
