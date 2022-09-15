@@ -2,8 +2,8 @@ package com.org.foodapp.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.org.foodapp.dto.Food;
+import com.org.foodapp.dto.User;
 
-public interface foodRepository extends JpaRepository<Food, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
 }
