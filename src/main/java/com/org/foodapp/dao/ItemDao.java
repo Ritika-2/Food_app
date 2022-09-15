@@ -19,31 +19,35 @@ public class ItemDao {
 		return itemRepository.save(item);
 	}
 	
-	public Item updateItem(Item item) {
-		return itemRepository.save(item);
+	public Optional<Item> getItemById(int id){
+		return itemRepository.findById(id);
 	}
 	
-	public List<Item> getAllItems(){
-		return itemRepository.findAll();
-	}
-	
-	public Item getItemById(int id) {
-		Optional<Item> found= itemRepository.findById(id);
-		if(found.isPresent()) {
-			return found.get();
-		}else {
-			return null;
-		}
-	}
-	
-	public String deleteItem(int id) {
-		 Item item=getItemById(id);
-		 if(item!= null) {
-			 itemRepository.delete(item);
-			 return  item.getName() + " item is deleted" ;
-		 }
-		 else {
-			 return  "No item is available with specified id " ;
-		 }
-	}
+//	public Item updateItem(Item item) {
+//		return itemRepository.save(item);
+//	}
+//	
+//	public List<Item> getAllItems(){
+//		return itemRepository.findAll();
+//	}
+//	
+//	public Item getItemById(int id) {
+//		Optional<Item> found= itemRepository.findById(id);
+//		if(found.isPresent()) {
+//			return found.get();
+//		}else {
+//			return null;
+//		}
+//	}
+//	
+//	public String deleteItem(int id) {
+//		 Item item=getItemById(id);
+//		 if(item!= null) {
+//			 itemRepository.delete(item);
+//			 return  item.getName() + " item is deleted" ;
+//		 }
+//		 else {
+//			 return  "No item is available with specified id " ;
+//		 }
+//	}
 }
