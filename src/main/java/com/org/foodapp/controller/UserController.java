@@ -1,18 +1,16 @@
 package com.org.foodapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.RestController;
 
-import com.org.foodapp.services.FoodProductService;
+import com.org.foodapp.services.UserService;
 
 @RestController
-public class FoodProductController {
+public class UserController {
+	
 	@Autowired
-	FoodProductService foodProductService;
+	UserService userService;
 	
-	// @PostMapping("/foodproducts")
-	
-	
-	
+	//@PostMapping
+
 }

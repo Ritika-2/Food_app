@@ -1,26 +1,16 @@
 package com.org.foodapp.services;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.org.foodapp.dao.FoodProductDao;
-
-
+import com.org.foodapp.dao.UserDao;
 
 @Service
-public class FoodProductService {
+public class UserService {
 	
 	@Autowired
-	FoodProductDao foodProductDao;
+	UserDao userDao;
 	
-	// @Autowired MenuDao menuDao;
-	
-	
-	
-	
-	
-	
+	// ResponseEntity
 
 }
