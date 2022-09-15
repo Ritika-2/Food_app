@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -26,6 +28,11 @@ public class FoodOrder {
 	
 	@OneToMany(cascade = CascadeType.ALL , mappedBy = "foodOrder")
 	private List<Item> items;
+	
+	@ManyToOne
+	@JoinColumn
+	User user;
+	
 	public int getId() {
 		return id;
 	}
@@ -68,4 +75,17 @@ public class FoodOrder {
 	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
 	}
+	public List<Item> getItems() {
+		return items;
+	}
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 }
